@@ -25,7 +25,7 @@ setInterval(function() {
             canvas.height = documentElement.clientHeight;
         }
     }
-    const gameContainer = document.querySelector('gameContainer');
+    const gameContainer = document.getElementById('gameContainer');
     if (gameContainer) {
         if (gameContainer.clientWidth != documentElement.clientWidth) {
             gameContainer.style.width = documentElement.clientWidth;
