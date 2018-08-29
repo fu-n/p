@@ -7,36 +7,8 @@
 <title>p2</title>
 <script src="Build/UnityLoader.js"></script>
 <script>
-function UnityProgress(gameInstance, progress) {
-    if (!gameInstance.Module) {
-        return;
-    }
-    if (!gameInstance.logo) {
-        gameInstance.logo = document.createElement("div");
-        gameInstance.logo.className = "logo " + gameInstance.Module.splashScreenStyle;
-        gameInstance.container.appendChild(gameInstance.logo);
-    }
-    if (!gameInstance.progress) {
-        gameInstance.progress = document.createElement("div");
-        gameInstance.progress.className = "progress " + gameInstance.Module.splashScreenStyle;
-        gameInstance.progress.empty = document.createElement("div");
-        gameInstance.progress.empty.className = "empty";
-        gameInstance.progress.appendChild(gameInstance.progress.empty);
-        gameInstance.progress.full = document.createElement("div");
-        gameInstance.progress.full.className = "full";
-        gameInstance.progress.appendChild(gameInstance.progress.full);
-        gameInstance.container.appendChild(gameInstance.progress);
-    }
-    gameInstance.progress.full.style.width  = (100 * progress) + "%";
-    gameInstance.progress.empty.style.width = (100 * (1 - progress)) + "%";
-    if (progress == 1) {
-        gameInstance.logo.style.display = gameInstance.progress.style.display = "none";
-    }
-}
-</script>
-<script>
 UnityLoader.SystemInfo.mobile = false;
-var gameInstance = UnityLoader.instantiate("gameContainer", "Build/p2.json", {onProgress: UnityProgress});
+var gameInstance = UnityLoader.instantiate("gameContainer", "Build/p2.json");
 </script>
 </head>
 <body style="margin:0px; padding:0px; overflow:hidden; background-color:black;">
@@ -46,23 +18,23 @@ const documentElement = document.documentElement;
 setInterval(function() {
     const canvas = document.querySelector('canvas');
     if (canvas) {
-        resize(canvas, documentElement);
-        return;
+        if (canvas.clientWidth != doc.clientWidth) {
+            canvas.width = doc.clientWidth;
+        }
+        if (canvas.clientHeight != doc.clientHeight) {
+            canvas.height = doc.clientHeight;
+        }
     }
     const gameContainer = document.querySelector('gameContainer');
     if (gameContainer) {
-        resize(gameContainer.style, documentElement);
-        return;
+        if (gameContainer.clientWidth != doc.clientWidth) {
+            gameContainer.style.width = doc.clientWidth;
+        }
+        if (gameContainer.clientHeight != doc.clientHeight) {
+            gameContainer.style.height = doc.clientHeight;
+        }
     }
-}, 1000);
-function resize(element, doc) {
-    if (element.clientWidth != doc.clientWidth) {
-        element.width = doc.clientWidth;
-    }
-    if (element.clientHeight != doc.clientHeight) {
-        element.height = doc.clientHeight;
-    }
-}
+}, 2000);
 </script>
 </body>
 </html>
