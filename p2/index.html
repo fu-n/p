@@ -28,10 +28,10 @@ setInterval(function() {
     const gameContainer = document.getElementById('gameContainer');
     if (gameContainer) {
         if (gameContainer.clientWidth != documentElement.clientWidth) {
-            gameContainer.style.width = documentElement.clientWidth;
+            gameContainer.style.width = documentElement.clientWidth + "px";
         }
         if (gameContainer.clientHeight != documentElement.clientHeight) {
-            gameContainer.style.height = documentElement.clientHeight;
+            gameContainer.style.height = documentElement.clientHeight + "px";
         }
     }
 }, 2000);
