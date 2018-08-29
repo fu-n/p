@@ -51,7 +51,7 @@ setInterval(function() {
     }
     const gameContainer = document.querySelector('gameContainer');
     if (gameContainer) {
-        resize(gameContainer, documentElement);
+        resize(gameContainer.style, documentElement);
         return;
     }
 }, 1000);
