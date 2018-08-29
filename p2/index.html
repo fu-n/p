@@ -18,20 +18,20 @@ const documentElement = document.documentElement;
 setInterval(function() {
     const canvas = document.querySelector('canvas');
     if (canvas) {
-        if (canvas.clientWidth != doc.clientWidth) {
-            canvas.width = doc.clientWidth;
+        if (canvas.clientWidth != documentElement.clientWidth) {
+            canvas.width = documentElement.clientWidth;
         }
-        if (canvas.clientHeight != doc.clientHeight) {
-            canvas.height = doc.clientHeight;
+        if (canvas.clientHeight != documentElement.clientHeight) {
+            canvas.height = documentElement.clientHeight;
         }
     }
     const gameContainer = document.querySelector('gameContainer');
     if (gameContainer) {
-        if (gameContainer.clientWidth != doc.clientWidth) {
-            gameContainer.style.width = doc.clientWidth;
+        if (gameContainer.clientWidth != documentElement.clientWidth) {
+            gameContainer.style.width = documentElement.clientWidth;
         }
-        if (gameContainer.clientHeight != doc.clientHeight) {
-            gameContainer.style.height = doc.clientHeight;
+        if (gameContainer.clientHeight != documentElement.clientHeight) {
+            gameContainer.style.height = documentElement.clientHeight;
         }
     }
 }, 2000);
