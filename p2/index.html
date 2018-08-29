@@ -11,11 +11,11 @@ function UnityProgress(gameInstance, progress) {
     if (!gameInstance.Module) {
         return;
     }
-    //if (!gameInstance.logo) {
-    //    gameInstance.logo = document.createElement("div");
-    //    gameInstance.logo.className = "logo " + gameInstance.Module.splashScreenStyle;
-    //    gameInstance.container.appendChild(gameInstance.logo);
-    //}
+    if (!gameInstance.logo) {
+        gameInstance.logo = document.createElement("div");
+        gameInstance.logo.className = "logo " + gameInstance.Module.splashScreenStyle;
+        gameInstance.container.appendChild(gameInstance.logo);
+    }
     if (!gameInstance.progress) {
         gameInstance.progress = document.createElement("div");
         gameInstance.progress.className = "progress " + gameInstance.Module.splashScreenStyle;
@@ -29,9 +29,9 @@ function UnityProgress(gameInstance, progress) {
     }
     gameInstance.progress.full.style.width  = (100 * progress) + "%";
     gameInstance.progress.empty.style.width = (100 * (1 - progress)) + "%";
-    //if (progress == 1) {
-    //    gameInstance.logo.style.display = gameInstance.progress.style.display = "none";
-    //}
+    if (progress == 1) {
+        gameInstance.logo.style.display = gameInstance.progress.style.display = "none";
+    }
 }
 </script>
 <script>
@@ -42,19 +42,27 @@ var gameInstance = UnityLoader.instantiate("gameContainer", "Build/p2.json", {on
 <body style="margin:0px; padding:0px; overflow:hidden; background-color:black;">
 <div id="gameContainer" style="width: 960px; height: 600px; margin: auto"></div>
 <script>
-const doc = document.documentElement;
+const documentElement = document.documentElement;
 setInterval(function() {
     const canvas = document.querySelector('canvas');
-    if (!canvas) {
+    if (canvas) {
+        resize(canvas, documentElement);
         return;
     }
-    if (canvas.clientWidth != doc.clientWidth) {
-        canvas.width = doc.clientWidth;
-    }
-    if (canvas.clientHeight != doc.clientHeight) {
-        canvas.height = doc.clientHeight;
+    const gameContainer = document.querySelector('gameContainer');
+    if (gameContainer) {
+        resize(gameContainer, documentElement);
+        return;
     }
 }, 1000);
+function resize(element, doc) {
+    if (element.clientWidth != doc.clientWidth) {
+        element.width = doc.clientWidth;
+    }
+    if (element.clientHeight != doc.clientHeight) {
+        element.height = doc.clientHeight;
+    }
+}
 </script>
 </body>
 </html>
