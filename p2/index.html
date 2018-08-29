@@ -1,25 +1,60 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | p2</title>
-    <link rel="shortcut icon" href="TemplateData/favicon.ico">
-    <link rel="stylesheet" href="TemplateData/style.css">
-    <script src="TemplateData/UnityProgress.js"></script>  
-    <script src="Build/UnityLoader.js"></script>
-    <script>
-      var gameInstance = UnityLoader.instantiate("gameContainer", "Build/p2.json", {onProgress: UnityProgress});
-    </script>
-  </head>
-  <body>
-    <div class="webgl-content">
-      <div id="gameContainer" style="width: 960px; height: 600px"></div>
-      <div class="footer">
-        <div class="webgl-logo"></div>
-        <div class="fullscreen" onclick="gameInstance.SetFullscreen(1)"></div>
-        <div class="title">p2</div>
-      </div>
-    </div>
-  </body>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=1136,initial-scale=1">
+<title>p2</title>
+<script src="Build/UnityLoader.js"></script>
+<script>
+function UnityProgress(gameInstance, progress) {
+    if (!gameInstance.Module) {
+        return;
+    }
+    //if (!gameInstance.logo) {
+    //    gameInstance.logo = document.createElement("div");
+    //    gameInstance.logo.className = "logo " + gameInstance.Module.splashScreenStyle;
+    //    gameInstance.container.appendChild(gameInstance.logo);
+    //}
+    if (!gameInstance.progress) {
+        gameInstance.progress = document.createElement("div");
+        gameInstance.progress.className = "progress " + gameInstance.Module.splashScreenStyle;
+        gameInstance.progress.empty = document.createElement("div");
+        gameInstance.progress.empty.className = "empty";
+        gameInstance.progress.appendChild(gameInstance.progress.empty);
+        gameInstance.progress.full = document.createElement("div");
+        gameInstance.progress.full.className = "full";
+        gameInstance.progress.appendChild(gameInstance.progress.full);
+        gameInstance.container.appendChild(gameInstance.progress);
+    }
+    gameInstance.progress.full.style.width  = (100 * progress) + "%";
+    gameInstance.progress.empty.style.width = (100 * (1 - progress)) + "%";
+    //if (progress == 1) {
+    //    gameInstance.logo.style.display = gameInstance.progress.style.display = "none";
+    //}
+}
+</script>
+<script>
+UnityLoader.SystemInfo.mobile = false;
+var gameInstance = UnityLoader.instantiate("gameContainer", "Build/p2.json", {onProgress: UnityProgress});
+</script>
+</head>
+<body style="margin:0px; padding:0px; overflow:hidden; background-color:black;">
+<div id="gameContainer" style="width: 960px; height: 600px; margin: auto"></div>
+<script>
+const doc = document.documentElement;
+setInterval(function() {
+    const canvas = document.querySelector('canvas');
+    if (!canvas) {
+        return;
+    }
+    if (canvas.clientWidth != doc.clientWidth) {
+        canvas.width = doc.clientWidth;
+    }
+    if (canvas.clientHeight != doc.clientHeight) {
+        canvas.height = doc.clientHeight;
+    }
+}, 1000);
+</script>
+</body>
 </html>
