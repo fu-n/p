@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=1136,initial-scale=1">
+<title>p3</title>
+<script src="Build/UnityLoader.js"></script>
+<script>
+UnityLoader.SystemInfo.mobile = false;
+var gameInstance = UnityLoader.instantiate("gameContainer", "Build/p3.json");
+</script>
+</head>
+<body style="margin:0px; padding:0px; overflow:hidden; background-color:black;">
+<div id="gameContainer" style="width: 960px; height: 600px; margin: auto"></div>
+<script>
+const documentElement = document.documentElement;
+setInterval(function() {
+    const canvas = document.querySelector('canvas');
+    if (canvas) {
+        if (canvas.clientWidth != documentElement.clientWidth) {
+            canvas.width = documentElement.clientWidth;
+        }
+        if (canvas.clientHeight != documentElement.clientHeight) {
+            canvas.height = documentElement.clientHeight;
+        }
+    }
+    const gameContainer = document.getElementById('gameContainer');
+    if (gameContainer) {
+        if (gameContainer.clientWidth != documentElement.clientWidth) {
+            gameContainer.style.width = documentElement.clientWidth + "px";
+        }
+        if (gameContainer.clientHeight != documentElement.clientHeight) {
+            gameContainer.style.height = documentElement.clientHeight + "px";
+        }
+    }
+}, 2000);
+</script>
+</body>
+</html>
